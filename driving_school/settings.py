@@ -196,3 +196,6 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.db'  # Default session engine
 
 DEFAULT_FROM_EMAIL = 'newandajmotordrivingschool@gmail.com'  # Email address used to send emails
 ADMIN_EMAIL = 'newandajmotordrivingschool@gmail.com'
+
+
+CSRF_TRUSTED_ORIGINS = ['https://driving-school-website.onrender.com']
