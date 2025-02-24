@@ -36,7 +36,7 @@
             <div class="instructor-grid">
                 {% for instructor in instructors %}
                     <div class="instructor-card">
-                        <img src="{{ instructor.image.url }}" alt="{{ instructor.name }}">
+                        <img src="{{ instructor.image_url }}" alt="{{ instructor.name }}">
                         <div class="instructor-info">
                             <h2>{{ instructor.name }}</h2>
                             <p class="title">{{ instructor.specialization }}</p>
