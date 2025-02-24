@@ -199,3 +199,6 @@ ADMIN_EMAIL = 'newandajmotordrivingschool@gmail.com'
 
 
 CSRF_TRUSTED_ORIGINS = ['https://driving-school-website.onrender.com']
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
