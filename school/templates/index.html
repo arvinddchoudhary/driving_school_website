@@ -42,7 +42,7 @@
                     <div class="feature-card">
                         <!-- Feature Image -->
                         {% if item.image %}
-                            <img src="{{ item.image_url }}" alt="{{ item.title }}">
+                            <img src="{{ item.image_url }}?v=1" alt="{{ item.title }}">
                         {% else %}
                             <img src="{% static 'default-image.jpg' %}" alt="{{ item.title }}">
                         {% endif %}
