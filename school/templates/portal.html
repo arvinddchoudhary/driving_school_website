@@ -1,0 +1,211 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Portal - New Andaj Motor Driving School</title>
+    
+    <link rel="stylesheet" href="{% static 'portal.css' %}?v=13">
+    <link rel="stylesheet" href="{% static 'main.css' %}?v=146">
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 45%; /* Default position */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            z-index: 1000;
+            font-size: 18px;
+            text-align: center;
+            max-width: 300px; /* Prevents it from becoming too wide */
+            width: 80%; /* Responsive width */
+        }
+        
+        /* Show the popup */
+        .popup.show {
+            display: block;
+        }
+        
+        /* Tablet (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .popup {
+                top: 40%; /* Moves it slightly higher */
+                font-size: 16px; /* Adjust font size */
+                padding: 12px 25px;
+            }
+        }
+        
+        /* Mobile (up to 767px) */
+        @media (max-width: 767px) {
+            .popup {
+                top: 45%; /* Centers better on mobile */
+                width: 90%; /* Makes it wider for small screens */
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+        
+        .popup.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">New Andaj Motor Driving School 🚗</div>
+            <div class="nav-toggle" onclick="toggleMenu()">☰</div>
+            <ul class="nav-links">
+                <li><a href="{% url 'index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a></li>
+                <li><a href="{% url 'courses' %}" class="{% if request.resolver_match.url_name == 'courses' %}active{% endif %}">Courses</a></li>
+                <li><a href="{% url 'instructors' %}" class="{% if request.resolver_match.url_name == 'instructors' %}active{% endif %}">Instructors</a></li>
+                <li><a href="{% url 'register' %}" class="{% if request.resolver_match.url_name == 'register' %}active{% endif %}">Register</a></li>
+                <li><a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+                <li><a href="{% url 'portal' %}" class="{% if request.resolver_match.url_name == 'portal' %}active{% endif %}">Student Portal</a></li>
+                {% if request.session.user_id %}
+                <li><a href="{% url 'logout' %}" class="{% if request.resolver_match.url_name == 'logout' %}active{% endif %}">Logout</a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </header>
+    {% if messages %}
+    <div class="popup show" id="popupMessage">
+        {% for message in messages %}
+            <div class="{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+            </div>
+        {% endif %}
+    <main class="body">
+        <section class="portal-header">
+            <h1>Student Portal</h1>
+            <p>Check the details about your course</p>
+        </section>
+
+        {% if request.session.user_id %}
+        <!-- Student Dashboard displaying user details if logged in -->
+        <section class="student-dashboard">
+            <div class="container">
+                <div class="student-details-form">
+                    <div class="form-header">
+                        <h2>Welcome, {{ user.first_name }}</h2>
+                        <p class="subtitle">Your Course Details</p>
+                    </div>
+                    <form>
+                        <div class="form-group">
+                            <label for="course"><strong>Course:</strong></label>
+                            <input type="text" id="course" value="{{ user.course }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="start_date"><strong>Enrollment Date:</strong></label>
+                            <input type="text" id="start_date" value="{{ user.start_date }}" disabled>
+                        </div>
+                        <div class="form-group">
+                            <label for="time_slot"><strong>Time Slot:</strong></label>
+                            <input type="text" id="time_slot" value="{{ user.time_slot }}" disabled>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+        {% else %}
+        <!-- Display Login form if user is not authenticated -->
+        <section class="portal-login">
+            <div class="container">
+                <div class="login-form">
+                    <div class="form-header">
+                        <h2>Login to Your Account</h2>
+                        <p class="subtitle">Welcome back! Please enter your details</p>
+                    </div>
+                    <form action="{% url 'portal' %}" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required placeholder="Enter your email">
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" required placeholder="Enter your password">
+                        </div>
+                        <div class="form-options">
+                            <label class="remember-me">
+                                <input type="checkbox" name="remember">
+                                <span>Remember me</span>
+                            </label>
+                            <a href="{% url 'forget_password' %}" class="forgot-password">Forgot Password?</a>
+
+                        </div>
+                        <button type="submit" class="login-button">Login</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>Contact Us</h4>
+                <p>
+                    📞 
+                    <a href="tel:+917976484896">+91 7976484896</a>, 
+                    <a href="tel:+917726863676">+91 7726863676</a>, 
+                    <a href="tel:+918696555563">+91 8696555563</a>
+                </p>
+                <p>📧newandajmotordrivingschool@gmail.com</p>
+                <p>📍 Ajmer Road, Bhankrota, Jaipur, Rajasthan</p>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{% url 'courses'%}">Courses</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'faq' %}">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/15WmZtgtfS/?mibextid=wwXIfr" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" 
+                             alt="Facebook Logo" width="40" height="40">
+                    </a>
+                    <a href="https://www.instagram.com/new_andaz_motor_driving_school/?hl=en" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" 
+                             alt="Instagram Logo" width="40" height="40">
+                    </a>
+                    <a href="https://x.com/NewAndaj_D_S" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" 
+             alt="Twitter Logo" width="40" height="35">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 New Andaj Motor Driving School. All rights reserved.</p>
+        </div>
+    </footer>
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var popup = document.getElementById("popupMessage");
+            if (popup) {
+                popup.classList.add("show");
+                setTimeout(function() {
+                    popup.classList.remove("show");
+                }, 4000); // Hide after 4 seconds
+            }
+        });
+    </script>
+</body>
+</html>

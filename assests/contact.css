@@ -1,0 +1,267 @@
+/* Contact Header */
+.contact-header {
+    text-align: center;
+    padding-top: 3rem;
+}
+
+.contact-header h1 {
+    font-size: 2.5rem;
+    color: var(--accent-color);
+    margin-top: 60px;
+}
+
+.contact-header p {
+    font-size: 1.1rem;
+    color: var(--accent-color);
+}
+
+/* Contact Information */
+.contact-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    padding: 2rem 8rem;
+}
+
+/* Contact Information Cards */
+.contact-info {
+    display: grid;
+    gap: 2rem;
+    grid-template-rows: auto auto;
+}
+
+.info-card {
+    background: var(--white);
+    padding: 1rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.info-card h2 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+}
+
+.info-card p {
+    margin-bottom: 0.5rem;
+    margin-right: -30px;
+    margin-left: -5px;
+}
+
+/* Map Styling */
+.map {
+    margin-top: 1rem;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.map iframe {
+    width: 100%;
+    height: 200px;
+    border: 0;
+}
+
+/* Contact Form */
+.contact-form {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+}
+
+.contact-form h2 {
+    color: var(--accent-color);
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+input,
+textarea {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid var(--secondary-color);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 150px;
+}
+
+.submit-button {
+    background-color: var(--accent-color);
+    color: var(--white);
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.submit-button:hover {
+    background-color: #0052a3;
+}
+
+/* Responsive Design - Tablet and Mobile */
+@media (max-width: 1024px) {
+    .contact-header {
+        padding-top: 4rem;
+    }
+
+    .contact-header h1 {
+        font-size: 2.2rem;
+    }
+
+    .contact-header p {
+        font-size: 1rem;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr; /* Stack map and form */
+        padding: 1.5rem 2rem;
+    }
+
+    .info-card {
+        padding: 1.5rem;
+    }
+
+    .map iframe {
+        height: 250px; /* Increase height slightly for better visibility */
+    }
+
+    .contact-form {
+        padding: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    input,
+    textarea {
+        font-size: 0.95rem;
+    }
+
+    .submit-button {
+        font-size: 1rem;
+        padding: 1rem 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .contact-header {
+        padding-top: 6rem;
+    }
+
+    .contact-header h1 {
+        font-size: 2rem;
+    }
+
+    .contact-header p {
+        font-size: 0.9rem;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr; /* Stack map and form */
+        padding: 1.5rem 1rem;
+    }
+
+    .map {
+        height: 250px;
+    }
+
+    .contact-form {
+        padding: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    label {
+        font-size: 0.9rem;
+    }
+
+    input,
+    textarea {
+        font-size: 0.95rem;
+    }
+
+    .submit-button {
+        font-size: 1rem;
+        padding: 1rem 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-header {
+        padding-top: 6rem;
+    }
+
+    .contact-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .contact-header p {
+        font-size: 0.85rem;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr; /* Stack map and form */
+        padding: 1rem;
+    }
+
+    .info-card {
+        padding: 1rem;
+    }
+
+    .map iframe {
+        height: 200px; /* Ensure it's smaller and fits */
+    }
+
+    .contact-form {
+        padding: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 0.8rem;
+    }
+
+    label {
+        font-size: 0.85rem;
+    }
+
+    input,
+    textarea {
+        font-size: 0.9rem;
+    }
+
+    .submit-button {
+        font-size: 1rem;
+        padding: 1rem;
+    }
+}

@@ -1,0 +1,197 @@
+:root {
+    --error-color: #dc3545;
+    --success-color: #28a745;
+    --primary-color: #e6f3ff;
+    --secondary-color: #b3d9ff;
+    --accent-color: #1e293b;
+    --text-color: #333;
+    --light-gray: #f5f5f5;
+    --white: #ffffff;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+    position: relative;
+}
+
+.background-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    z-index: -1;
+}
+
+/* Navbar Styles */
+.navbar {
+    background-color: white;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-brand {
+    color: black;
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Main Container Styles */
+.auth-container {
+    max-width: 400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.auth-card {
+    background: var(--white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.auth-card h1 {
+    color: black;
+    margin-bottom: 0.5rem;
+    font-size: 1.8rem;
+}
+
+.auth-subtitle {
+    color: var(--text-color);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+}
+
+/* Message Container */
+.message-container {
+    margin-bottom: 1.5rem;
+}
+
+.message {
+    padding: 0.75rem;
+    margin-bottom: 1rem;
+    border-radius: 5px;
+    background-color: var(--success-color);
+    color: var(--white);
+}
+
+.message.error {
+    background-color: var(--error-color);
+}
+
+/* OTP Form Styles */
+.otp-form {
+    margin-bottom: 1.5rem;
+}
+
+.otp-inputs {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.otp-inputs input {
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 1.2rem;
+    border: 2px solid var(--secondary-color);
+    border-radius: 5px;
+    padding: 0.3rem;
+}
+
+.otp-inputs input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+}
+
+/* Button Styles */
+.auth-button {
+    background-color: #28a745;
+    color: var(--white);
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.auth-button:hover {
+    background-color: #0052a3;
+}
+
+/* Resend Link Styles */
+.resend-text {
+    margin-top: 1.5rem;
+    color: var(--text-color);
+}
+
+.resend-link {
+    color: blue;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.resend-link:hover {
+    text-decoration: underline;
+}
+
+/* Footer Styles */
+.footer {
+    text-align: center;
+    padding: 1.5rem;
+    color: var(--text-color);
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: var(--white);
+    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .auth-container {
+        margin: 1rem auto;
+    }
+
+    .auth-card {
+        padding: 1.5rem;
+    }
+
+    .otp-inputs {
+        gap: 0.3rem;
+    }
+
+    .otp-inputs input {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
+    }
+
+    .navbar {
+        padding: 0.8rem 1rem;
+    }
+
+    .nav-brand {
+        font-size: 1.2rem;
+    }
+}
+
+/* For smaller screens */
+@media (max-width: 320px) {
+    .otp-inputs input {
+        width: 30px;
+        height: 30px;
+        font-size: 0.9rem;
+    }
+}

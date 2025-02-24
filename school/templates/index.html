@@ -1,0 +1,132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Andaj Motor Driving School</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}?v=1293">
+    <link rel="stylesheet" href="{% static 'home.css' %}?v=1223">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">New Andaj Motor Driving School 🚗</div>
+            <div class="nav-toggle" onclick="toggleMenu()">☰</div>
+            <ul class="nav-links">
+                <li><a href="{% url 'index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a></li>
+                <li><a href="{% url 'courses' %}" class="{% if request.resolver_match.url_name == 'courses' %}active{% endif %}">Courses</a></li>
+                <li><a href="{% url 'instructors' %}" class="{% if request.resolver_match.url_name == 'instructors' %}active{% endif %}">Instructors</a></li>
+                <li><a href="{% url 'register' %}" class="{% if request.resolver_match.url_name == 'register' %}active{% endif %}">Register</a></li>
+                <li><a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+                <li><a href="{% url 'portal' %}" class="{% if request.resolver_match.url_name == 'student_portal' %}active{% endif %}">Student Portal</a></li>
+                
+                
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Start Your Driving Journey Today</h1>
+                <p>Professional instructors, flexible schedules, and comprehensive training programs</p>
+                <a href="{% url 'register' %}" class="cta-button">Get Started</a>
+            </div>
+        </section>
+
+        <section class="features">
+            <h2>Why Choose New Andaj Motor Driving School?</h2>
+            <div class="feature-grid">
+                {% for item in Home_data %}
+                    <div class="feature-card">
+                        <!-- Feature Image -->
+                        {% if item.image %}
+                            <img src="{{ item.image.url }}" alt="{{ item.title }}">
+                        {% else %}
+                            <img src="{% static 'default-image.jpg' %}" alt="{{ item.title }}">
+                        {% endif %}
+                        <div class="feature-content">
+                            <h3>{{ item.title }}</h3>
+                            <p>{{ item.description }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No data available.</p>
+                {% endfor %}
+            </div>
+        </section>
+
+        <section class="testimonials">
+            <h2>Student Testimonials</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p>"The best driving school in Jaipur! Passed my test on the first try."</p>
+                    <cite>- Arvind </cite>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Patient instructors and excellent learning materials."</p>
+                    <cite>- Aman </cite>
+                </div>
+                <div class="testimonial-card">
+                    <p>"Flexible scheduling made it easy to learn while working."</p>
+                    <cite>- Siva </cite>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>
+                    📞 
+                    <a href="tel:+917976484896">+91 7976484896</a>, 
+                    <a href="tel:+917726863676">+91 7726863676</a>, 
+                    <a href="tel:+918696555563">+91 8696555563</a>
+                </p>
+                
+                <p>📧 newandajmotordrivingschool@gmail.com</p>
+                <p>📍 Ajmer Road, Bhankrota, Jaipur, Rajasthan</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'faq' %}">FAQ</a></li>
+
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/15WmZtgtfS/?mibextid=wwXIfr" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" 
+                             alt="Facebook Logo" width="40" height="40">
+                    </a>
+                    <a href="https://www.instagram.com/new_andaz_motor_driving_school/?hl=en" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" 
+                             alt="Instagram Logo" width="40" height="40">
+                    </a>
+                    <a href="https://x.com/NewAndaj_D_S" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" 
+             alt="Twitter Logo" width="40" height="35">
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 New Andaj Motor Driving School. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

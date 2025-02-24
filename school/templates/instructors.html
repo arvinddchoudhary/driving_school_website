@@ -1,0 +1,104 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructors - New Andaj Motor Driving School</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}?v=1743">
+    <link rel="stylesheet" href="{% static 'instructors.css' %}?v=123">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">New Andaj Motor Driving School 🚗</div>
+            <div class="nav-toggle" onclick="toggleMenu()">☰</div>
+            <ul class="nav-links">
+                <li><a href="{% url 'index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a></li>
+                <li><a href="{% url 'courses' %}" class="{% if request.resolver_match.url_name == 'courses' %}active{% endif %}">Courses</a></li>
+                <li><a href="{% url 'instructors' %}" class="{% if request.resolver_match.url_name == 'instructors' %}active{% endif %}">Instructors</a></li>
+                <li><a href="{% url 'register' %}" class="{% if request.resolver_match.url_name == 'register' %}active{% endif %}">Register</a></li>
+                <li><a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+                <li><a href="{% url 'portal' %}" class="{% if request.resolver_match.url_name == 'student_portal' %}active{% endif %}">Student Portal</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Meet Our Expert Instructors</h1>
+                <p>Learn from highly experienced and certified professionals</p>
+            </div>
+        </section>
+
+        <section class="instructors-header">
+            <div class="instructor-grid">
+                {% for instructor in instructors %}
+                    <div class="instructor-card">
+                        <img src="{{ instructor.image.url }}" alt="{{ instructor.name }}">
+                        <div class="instructor-info">
+                            <h2>{{ instructor.name }}</h2>
+                            <p class="title">{{ instructor.specialization }}</p>
+                            <p class="experience">{{ instructor.experience }}+ years of experience</p>
+                            <p class="bio">{{ instructor.description }}</p>
+                        </div>
+                    </div>
+                {% empty %}
+                    <p>No instructors available.</p>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>
+                    📞 
+                    <a href="tel:+917976484896">+91 7976484896</a>, 
+                    <a href="tel:+917726863676">+91 7726863676</a>, 
+                    <a href="tel:+918696555563">+91 8696555563</a>
+                </p>
+                <p>📧 newandajmotordrivingschool@gmail.com</p>
+                <p>📍 Ajmer Road, Bhankrota, Jaipur, Rajasthan</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'faq' %}">FAQ</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/15WmZtgtfS/?mibextid=wwXIfr" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" 
+                             alt="Facebook Logo" width="40" height="40">
+                    </a>
+                    <a href="https://www.instagram.com/new_andaz_motor_driving_school/?hl=en" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" 
+                             alt="Instagram Logo" width="40" height="40">
+                    </a>
+                    <a href="https://x.com/NewAndaj_D_S" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" 
+             alt="Twitter Logo" width="40" height="35">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 New Andaj Motor Driving School. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

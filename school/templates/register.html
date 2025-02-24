@@ -1,0 +1,244 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - New Andaj Motor Driving School</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}?v=123">
+    <link rel="stylesheet" href="{% static 'register.css' %}?v=123">
+
+    <style>
+        .popup {
+            display: none;
+            position: fixed;
+            top: 45%; /* Default position */
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 15px 30px;
+            border-radius: 8px;
+            z-index: 1000;
+            font-size: 18px;
+            text-align: center;
+            max-width: 300px; /* Prevents it from becoming too wide */
+            width: 80%; /* Responsive width */
+        }
+        
+        /* Show the popup */
+        .popup.show {
+            display: block;
+        }
+        
+        /* Tablet (768px - 1024px) */
+        @media (max-width: 1024px) {
+            .popup {
+                top: 40%; /* Moves it slightly higher */
+                font-size: 16px; /* Adjust font size */
+                padding: 12px 25px;
+            }
+        }
+        
+        /* Mobile (up to 767px) */
+        @media (max-width: 767px) {
+            .popup {
+                top: 50%; /* Centers better on mobile */
+                width: 90%; /* Makes it wider for small screens */
+                font-size: 14px;
+                padding: 10px 20px;
+            }
+        }
+        
+        .popup.show {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">New Andaj Motor Driving School 🚗</div>
+            <div class="nav-toggle" onclick="toggleMenu()">☰</div>
+            <ul class="nav-links">
+                <li><a href="{% url 'index' %}" class="{% if request.resolver_match.url_name == 'index' %}active{% endif %}">Home</a></li>
+                <li><a href="{% url 'courses' %}" class="{% if request.resolver_match.url_name == 'courses' %}active{% endif %}">Courses</a></li>
+                <li><a href="{% url 'instructors' %}" class="{% if request.resolver_match.url_name == 'instructors' %}active{% endif %}">Instructors</a></li>
+                <li><a href="{% url 'register' %}" class="{% if request.resolver_match.url_name == 'register' %}active{% endif %}">Register</a></li>
+                <li><a href="{% url 'contact' %}" class="{% if request.resolver_match.url_name == 'contact' %}active{% endif %}">Contact</a></li>
+                <li><a href="{% url 'portal' %}" class="{% if request.resolver_match.url_name == 'student_portal' %}active{% endif %}">Student Portal</a></li>
+        
+            </ul>
+        </nav>
+    </header>
+    {% if messages %}
+    <div class="popup show" id="popupMessage">
+        {% for message in messages %}
+            <div class="{{ message.tags }}">{{ message }}</div>
+        {% endfor %}
+    </div>
+{% endif %}
+<main>
+    <section class="register-header">
+        <h1>Register for a Course</h1>
+        <p>Start your journey to becoming a confident driver</p>
+    </section>
+
+        <section class="register-form">
+            <form action="{% url 'register' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <h2>Personal Information</h2>
+                    <div class="input-group">
+                        <label for="first_name">First Name</label>
+                        <input type="text" id="first_name" name="first_name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="last_name">Last Name</label>
+                        <input type="text" id="last_name" name="last_name" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Create a password">
+                    </div>
+                    <div class="input-group">
+                        <label for="confirm-password">Confirm Password</label>
+                        <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm your password">
+                    </div>
+                    <div class="input-group">
+                        <label for="phone">Phone</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <!-- New Location Field -->
+                    <div class="input-group">
+                        <label for="location">Address</label>
+                        <input type="text" id="location" name="location" required placeholder="Enter your Address">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h2>Course Selection</h2>
+                    <div class="input-group">
+                        <label for="course">Select Course</label>
+                        <select name="course" id="course">
+                            <option value="" {% if not selected_course %}selected{% endif %}>-- Choose a course --</option>
+                            <option value="15 Day Course" {% if selected_course == "15 Day Course" %}selected{% endif %}>15 Day Course - ₹3500</option>
+                            <option value="20 Day Course" {% if selected_course == "20 Day Course" %}selected{% endif %}>20 Day Course - ₹4000</option>
+                            <option value="25 Day Course" {% if selected_course == "25 Day Course" %}selected{% endif %}>25 Day Course - ₹4500</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="start_date">Preferred Start Date</label>
+                        <input type="date" id="start_date" name="start_date" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="time_slot">Preferred Time Slot</label>
+                        <select id="time_slot" name="time_slot" required>
+                            <option value="">Choose a time slot...</option>
+                            <option value="morning">Morning/Afternoon (6 AM - 1 PM)</option>
+                            <option value="evening">Evening (2 PM - 9 PM)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <h2>Additional Information</h2>
+                    <div class="input-group">
+                        <label for="experience">Previous Driving Experience</label>
+                        <select id="experience" name="experience" required>
+                            <option value="none">No experience</option>
+                            <option value="some">Some experience</option>
+                            <option value="licensed">Licensed in another state</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label for="notes">Special Requirements or Notes</label>
+                        <textarea id="notes" name="notes" rows="4"></textarea>
+                    </div>
+                </div>
+
+                <button type="submit" class="submit-button">Register Now</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <p>
+                    📞 
+                    <a href="tel:+917976484896">+91 7976484896</a>, 
+                    <a href="tel:+917726863676">+91 7726863676</a>, 
+                    <a href="tel:+918696555563">+91 8696555563</a>
+                </p>
+                <p>📧 newandajmotordrivingschool@gmail.com</p>
+                <p>📍 Ajmer Road, Bhankrota, Jaipur, Rajasthan</p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="{% url 'courses' %}">Courses</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                    <li><a href="{% url 'faq' %}">FAQ</a></li>
+                   
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Follow Us</h3>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/share/15WmZtgtfS/?mibextid=wwXIfr" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" 
+                             alt="Facebook Logo" width="40" height="40">
+                    </a>
+                    <a href="https://www.instagram.com/new_andaz_motor_driving_school/?hl=en" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e7/Instagram_logo_2016.svg" 
+                             alt="Instagram Logo" width="40" height="40">
+                    </a>
+                    <a href="https://x.com/NewAndaj_D_S" target="_blank">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/c/ce/X_logo_2023.svg" 
+             alt="Twitter Logo" width="40" height="35">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 New Andaj Motor Driving School. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{% static 'scripts/main.js' %}"></script>
+    <script>
+        function toggleMenu() {
+            document.querySelector('.nav-links').classList.toggle('active');
+        }
+
+        document.querySelector('.auth-form').addEventListener('submit', function(event) {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirm-password').value;
+            
+            if (password !== confirmPassword) {
+                alert('Passwords do not match!');
+                event.preventDefault();
+            }
+        });
+
+
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var popup = document.getElementById("popupMessage");
+            if (popup) {
+                popup.classList.add("show");
+                setTimeout(function() {
+                    popup.classList.remove("show");
+                }, 4000); // Hide after 4 seconds
+            }
+        });
+    </script>
+    
+</body>
+</html>
