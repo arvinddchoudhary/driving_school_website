@@ -36,7 +36,7 @@
         <section class="course-grid">
             {% for course in courses %}
                 <div class="course-card" aria-labelledby="course-{{ course.id }}">
-                    {% if course.image %}
+                    {% if course.image_url %}
                         <img src="{{ course.image_url }}?v=1" alt="Course Image for {{ course.name }}">
                     {% else %}
                         <img src="{% static 'default-image.jpg' %}" alt="Default Course Image">
