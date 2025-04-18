@@ -54,6 +54,7 @@
                     </div>
                 {% empty %}
                     <!-- <p>No data available.</p> -->
+                    {% for item in home_data %}
                     <div class="feature-card">
                         <!-- Feature Image -->
                         
@@ -67,6 +68,7 @@
                             <p>{{ item.description }}</p>
                         </div>
                     </div>
+                    {% endfor %}
                 {% endfor %}
             </div>
         </section>
