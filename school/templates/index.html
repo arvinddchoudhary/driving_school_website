@@ -41,6 +41,7 @@
                 {% for item in home_data %}
                     <div class="feature-card">
                         <!-- Feature Image -->
+                        <p>{{ item.image_url }}</p>
                         {% if item.image_url %}
                             <img src="{{ item.image_url}}" alt="{{ item.title }}">
                         {% else %}
