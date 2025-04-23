@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_HUB_REPO = 'arvind09112004/driving_school' // Replace with your Docker Hub repo
+        DOCKER_HUB_REPO = 'arvind09112004/driving_school'
         DOCKER_IMAGE_TAG = "latest"
-        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials' // Replace with your Jenkins Docker Hub credentials ID
-        GIT_REPO = 'https://github.com/arvinddchoudhary/driving_school_website.git' // Replace with your GitHub repo URL
-        GITHUB_CREDENTIALS_ID = 'github-credentials' // Replace with your Jenkins GitHub credentials ID
+        DOCKER_CREDENTIALS_ID = 'docker-hub-credentials'
+        GIT_REPO = 'https://github.com/arvinddchoudhary/driving_school_website.git'
+        GITHUB_CREDENTIALS_ID = 'github-credentials'
     }
 
     stages {
@@ -29,10 +29,12 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    bat """
-                    docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%
-                    """
-                    bat "docker push ${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}"
+                    withCredentials([usernamePassword(credentialsId: "${DOCKER_CREDENTIALS_ID}", usernameVariable: 'DOCKER_USERNAME', passwordVariable: 'DOCKER_PASSWORD')]) {
+                        bat """
+                        echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin
+                        docker push ${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}
+                        """
+                    }
                 }
             }
         }
