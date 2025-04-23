@@ -50,7 +50,7 @@ pipeline {
                     )
 
                     echo Running new container...
-                    docker run -d --name driving_school -p 8000:8000 ${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}
+                    docker run -d --name driving_school -p 8005:8000 ${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}
                     """
                 }
             }
