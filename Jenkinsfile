@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     bat """
-                    echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin
+                    docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%
                     """
                     bat "docker push ${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}"
                 }
