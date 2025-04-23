@@ -29,7 +29,9 @@ pipeline {
         stage('Push Docker Image to Docker Hub') {
             steps {
                 script {
-                    bat "docker login -u %DOCKER_USERNAME% -p %DOCKER_PASSWORD%"
+                    bat """
+                    echo %DOCKER_PASSWORD% | docker login -u %DOCKER_USERNAME% --password-stdin
+                    """
                     bat "docker push ${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}"
                 }
             }
