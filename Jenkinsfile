@@ -42,13 +42,14 @@ pipeline {
         stage('Deploy Docker Container') {
             steps {
                 script {
-                    // Stop the old container if it's running
                     bat """
-                    docker ps -q --filter "name=driving_school" | for /F %i in ('findstr /R /C:"."') do docker stop %i && docker rm %i
-                    """
+                    echo Stopping and removing old container (if exists)...
+                    FOR /F %%i IN ('docker ps -q --filter "name=driving_school"') DO (
+                        docker stop %%i
+                        docker rm %%i
+                    )
 
-                    // Run the new container
-                    bat """
+                    echo Running new container...
                     docker run -d --name driving_school -p 8000:8000 ${DOCKER_HUB_REPO}:${DOCKER_IMAGE_TAG}
                     """
                 }
