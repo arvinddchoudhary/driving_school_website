@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: driving-config
+data:
+  EMAIL_BACKEND: "django.core.mail.backends.smtp.EmailBackend"
+  EMAIL_HOST: "smtp.gmail.com"
+  EMAIL_PORT: "587"
+  EMAIL_USE_TLS: "True"
+
+  DEBUG: "True"
+  ALLOWED_HOSTS: "localhost 127.0.0.1 drivingschool.local"
+
+  DATABASE_NAME: "driving_school"
+  DATABASE_USER: "neondb_owner"
+  DATABASE_HOST: "ep-withered-term-a59ozhc5-pooler.us-east-2.aws.neon.tech"
+  DATABASE_PORT: "5432"
