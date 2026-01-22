@@ -1,0 +1,50 @@
+---
+- hosts: app
+  become: yes
+  tasks:
+
+    - name: Ensure Docker service is running
+      service:
+        name: docker
+        state: started
+
+    - name: Restart Docker Compose containers for Driving School App
+      shell: |
+        cd /home/ubuntu/driving-school
+        docker-compose up -d
+
+    - name: Verify Docker containers are running
+      shell: docker ps
+      register: docker_output
+
+    - debug:
+        var: docker_output.stdout
+
+
+- hosts: nagios
+  become: yes
+  tasks:
+
+    - name: Start Apache2 service
+      service:
+        name: apache2
+        state: started
+
+    - name: Start Nagios service
+      service:
+        name: nagios4
+        state: started
+
+    - name: Start NRPE service (optional)
+      service:
+        name: nagios-nrpe-server
+        state: started
+      ignore_errors: yes
+
+    - name: Check Nagios service status
+      shell: systemctl status nagios4 --no-pager
+      register: nagios_status
+
+    - debug:
+        var: nagios_status.stdout
+

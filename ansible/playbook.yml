@@ -1,0 +1,28 @@
+---
+- name: Configure Driving School App
+  hosts: app
+  become: yes
+  tasks:
+    - name: Install dependencies
+      apt:
+        name: ["git", "docker.io", "curl"]
+        state: present
+        update_cache: yes
+
+    - name: Install latest Docker Compose
+      shell: |
+        curl -SL https://github.com/docker/compose/releases/download/v2.29.2/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+        chmod +x /usr/local/bin/docker-compose
+
+    - name: Clone project from GitHub
+      git:
+        repo: "https://github.com/arvinddchoudhary/driving_school_website.git"
+        dest: /home/ubuntu/driving-school
+        version: main
+        force: yes
+
+    - name: Run app using Docker Compose
+      shell: |
+        cd /home/ubuntu/driving-school
+        docker-compose up -d
+
